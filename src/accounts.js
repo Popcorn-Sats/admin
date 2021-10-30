@@ -1,17 +1,17 @@
 import * as React from "react";
-import { List, Datagrid, TextField, DateField, NumberField, BooleanField } from 'react-admin';
+import { List, Datagrid, TextField, DateField, BooleanField, RichTextField, ChipField } from 'react-admin';
 
 export const AccountList = props => (
   <List {...props}>
       <Datagrid rowClick="show">
           <TextField source="id" />
           <TextField source="name" />
-          <TextField source="notes" />
+          <RichTextField source="notes" />
           <DateField source="birthday" />
-          <NumberField source="active" />
+          <BooleanField source="active" />
           <BooleanField source="owned" />
-          <TextField source="accounttype.name" />
-          <NumberField source="xpub.name" />
+          <ChipField label="Type" source="accounttype.name" />
+          <TextField label="XPub" source="xpub.name" />
       </Datagrid>
   </List>
 );
