@@ -1,5 +1,5 @@
-import * as React from "react";
-import { List, Datagrid, TextField, DateField, BooleanField, RichTextField, ChipField } from 'react-admin';
+import * as React from "react"
+import { List, Datagrid, TextField, DateField, BooleanField, RichTextField, ChipField } from 'react-admin'
 
 export const AccountList = props => (
   <List {...props}>
@@ -14,4 +14,4 @@ export const AccountList = props => (
           <TextField label="XPub" source="xpub.name" />
       </Datagrid>
   </List>
-);
+)

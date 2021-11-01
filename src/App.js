@@ -4,6 +4,7 @@ import { Admin, Resource, ListGuesser } from 'react-admin'
 import dataProvider from './dataProvider'
 import { AccountList } from "./accounts"
 import { AccountShow } from "./accountShow"
+import { CategoryList } from "./categories"
 
 // const dataProvider = jsonServerProvider('https://jsonplaceholder.typicode.com')
 const App = () => (
@@ -11,7 +12,7 @@ const App = () => (
     <Resource name="accounts" list={AccountList} show={AccountShow} />
     <Resource name="accounttypes" list={ListGuesser} />
     <Resource name="blocks" list={ListGuesser} />
-    <Resource name="categories" list={ListGuesser} />
+    <Resource name="categories" list={CategoryList} />
     <Resource name="transactions" list={ListGuesser} />
     <Resource name="transactiontypes" list={ListGuesser} />
   </Admin>
