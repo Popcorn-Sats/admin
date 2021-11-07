@@ -24,10 +24,19 @@ const dataProvider = {
         }));
     },
 
-    getOne: (resource, params) =>
-        httpClient(`${apiUrl}/${resource}/${params.id}`).then(({ json }) => ({
+    getOne: (resource, params) => {
+      console.log(resource)
+      const url = `${apiUrl}/${resource}`
+        if (resource === 'transactions') {
+          return httpClient(`${url}/transaction/${params.id}`).then(({ json }) => ({
             data: json,
-        })),
+          }))
+        } else {
+          return httpClient(`${url}/${params.id}`).then(({ json }) => ({
+            data: json,
+          }))
+        }
+    },
 
     getMany: (resource, params) => {
         const query = {
