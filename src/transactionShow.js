@@ -5,7 +5,9 @@ import {
     ReferenceField,
     TextField,
     Toolbar,
-    Show
+    Show,
+    ArrayField,
+    Datagrid
 } from 'react-admin';
 import { Link as RouterLink } from 'react-router-dom';
 import {
@@ -17,27 +19,6 @@ import {
     Link,
 } from '@material-ui/core'
 
-const CustomerDetails = () => (
-    <Box display="flex" flexDirection="column">
-        <Typography
-            component={RouterLink}
-            color="primary"
-            /* to={`/customers/${record?.id}`} */
-            style={{ textDecoration: 'none' }}
-        >
-            Account
-        </Typography>
-        <Typography
-            component={Link}
-            color="primary"
-            /* href={`mailto:${record?.email}`} */
-            style={{ textDecoration: 'none' }}
-        >
-            Something else
-        </Typography>
-    </Box>
-);
-
 const CustomerAddress = () => (
     <Box>
         <Typography>
@@ -48,7 +29,7 @@ const CustomerAddress = () => (
             Another something
         </Typography>
     </Box>
-);
+)
 
 const Spacer = () => <Box m={1}>&nbsp;</Box>;
 
@@ -76,7 +57,7 @@ export const TransactionShow = (props) => {
                                 </Grid>
                                 <Grid item xs={12} sm={12} md={6}>
                                     <Labeled
-                                        source="reference"
+                                        source="block height"
                                         resource="commands"
                                     >
                                         <TextField
@@ -87,33 +68,53 @@ export const TransactionShow = (props) => {
                             </Grid>
                             <Grid container>
                                 <Grid item xs={12} sm={12} md={6}>
-                                <Typography variant="h6" gutterBottom>
-                                Something
-                            </Typography>
+                                  <Box mt={2}>
+                                    <Labeled
+                                          source="category"
+                                          resource="commands"
+                                      >
+                                          <TextField
+                                              source="category.name"
+                                          />
+                                      </Labeled>
+                                  </Box>
                                 </Grid>
                                 <Grid item xs={12} sm={12} md={6}>
-                                    <Box mt={2}>
-                                    <Typography variant="h6" gutterBottom>
-                                Something
-                            </Typography>
-                                    </Box>
+                                  <Box mt={2}>
+                                    <Labeled
+                                      source="description"
+                                      resource="commands"
+                                    >
+                                      <TextField
+                                        source="description"
+                                      />
+                                    </Labeled>
+                                  </Box>
                                 </Grid>
                             </Grid>
                         </Grid>
                         <Grid item xs={12} sm={12} md={4}>
                             <Typography variant="h6" gutterBottom>
-                            Something
+                              Transaction Data
                             </Typography>
-                            <ReferenceField
-                                source="txid"
-                                resource="commands"
-                                reference="accounts"
-                                basePath="/accounts"
-                                /* record={formProps.record} */
-                                link={false}
-                            >
-                                <CustomerDetails />
-                            </ReferenceField>
+                                <Box display="flex" flexDirection="column">
+                                  <Typography
+                                      component={RouterLink}
+                                      color="primary"
+                                      /* to={`/accounts/${account?.id}`} */
+                                      style={{ textDecoration: 'none' }}
+                                  >
+                                      Account
+                                  </Typography>
+                                  <Typography
+                                      component={Link}
+                                      color="primary"
+                                      /* href={`mailto:${record?.email}`} */
+                                      style={{ textDecoration: 'none' }}
+                                  >
+                                      Something else
+                                  </Typography>
+                              </Box>
                             <Spacer />
 
                             <Typography variant="h6" gutterBottom>
@@ -137,8 +138,18 @@ export const TransactionShow = (props) => {
                         Transaction Ledgers
                     </Typography>
                     <Box>
-                        TODO: Transaction ledgers component
-                        {/* <Basket record={formProps.record} /> */}
+                      <Typography variant="h7" gutterBottom>
+                          <strong>Debits</strong>
+                      </Typography>
+                      <ArrayField source="transactionledgers">
+                        <Datagrid>
+                          <TextField label="Account" source="account.name" />
+                          <TextField source="amount" />
+                          <TextField source="address" />
+                          <TextField source="transactiontypeId" />
+                          <TextField label="UTXO" source="utxo.utxo" />
+                        </Datagrid>
+                      </ArrayField>
                     </Box>
                     <Spacer />
 
@@ -146,7 +157,8 @@ export const TransactionShow = (props) => {
                       Totals
                     </Typography>
                     <Box>
-                        TODO: Totals component
+                        TODO: Totals component <br />
+                        <TextField source="balance_change" />
                         {/* <Totals record={formProps.record} /> */}
                     </Box>
                 </CardContent>
