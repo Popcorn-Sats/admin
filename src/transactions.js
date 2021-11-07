@@ -3,7 +3,7 @@ import { List, Datagrid, TextField, RichTextField, DateField } from 'react-admin
 
 export const TransactionList = props => (
   <List {...props}>
-      <Datagrid rowClick="edit">
+      <Datagrid rowClick="show">
           <DateField label="Date" source="block.date" />
           <TextField label="Type" source="transactiontype.type" />
           <TextField label="Category" source="category.name" />
