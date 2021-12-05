@@ -1,5 +1,5 @@
 import * as React from "react"
-import { List, Datagrid, TextField, DateField, BooleanField, RichTextField, ChipField } from 'react-admin'
+import { List, Datagrid, TextField, DateField, BooleanField, RichTextField, ChipField, NumberField } from 'react-admin'
 
 export const AccountList = props => (
   <List {...props}>
@@ -11,7 +11,7 @@ export const AccountList = props => (
           <BooleanField source="active" />
           <BooleanField source="owned" />
           <ChipField label="Type" source="accounttype.name" />
-          <TextField label="XPub" source="xpub.name" />
+          <NumberField label="Balance (sats)" source="balance" />
       </Datagrid>
   </List>
 )
