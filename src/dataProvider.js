@@ -47,7 +47,21 @@ const dataProvider = {
     },
 
     getManyReference: (resource, params) => {
-        const { page, perPage } = params.pagination;
+        // Add the reference id to the filter params.
+        let refResource;
+        let query = {};
+
+        const match = /_nested_(.*)_id/g.exec(params.target);
+        if (match != null) {
+          refResource = `${resource}/${match[1]}/${params.id}`;
+        } else {
+          query[`filter[${params.target}]`] = params.id;
+          refResource = resource;
+        }
+
+        const url = `${apiUrl}/${refResource}?${stringify(query)}`;
+
+        /* const { page, perPage } = params.pagination;
         const { field, order } = params.sort;
         const query = {
             sort: JSON.stringify([field, order]),
@@ -57,11 +71,12 @@ const dataProvider = {
                 [params.target]: params.id,
             }),
         };
-        const url = `${apiUrl}/${resource}?${stringify(query)}`;
+        const url = `${apiUrl}/${resource}?${stringify(query)}`; */
 
         return httpClient(url).then(({ headers, json }) => ({
             data: json,
-            total: parseInt(headers.get('content-range').split('/').pop(), 10),
+            total: 10,
+            // total: parseInt(headers.get('content-range').split('/').pop(), 10),
         }));
     },
 
