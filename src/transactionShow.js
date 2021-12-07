@@ -7,6 +7,7 @@ import {
     Toolbar,
     Show,
     ArrayField,
+    NumberField,
     Datagrid
 } from 'react-admin';
 import { Link as RouterLink } from 'react-router-dom';
@@ -141,10 +142,26 @@ export const TransactionShow = (props) => {
                       <Typography variant="h7" gutterBottom>
                           <strong>Debits</strong>
                       </Typography>
-                      <ArrayField source="transactionledgers">
+                      <ArrayField source="debitsLedger">
                         <Datagrid>
                           <TextField label="Account" source="account.name" />
-                          <TextField source="amount" />
+                          <NumberField source="amount" />
+                          <TextField source="address" />
+                          <TextField source="transactiontypeId" />
+                          <TextField label="UTXO" source="utxo.utxo" />
+                        </Datagrid>
+                      </ArrayField>
+                    </Box>
+                    <Spacer />
+
+                    <Box>
+                      <Typography variant="h7" gutterBottom>
+                          <strong>Credits</strong>
+                      </Typography>
+                      <ArrayField source="creditsLedger">
+                        <Datagrid>
+                          <TextField label="Account" source="account.name" />
+                          <NumberField source="amount" />
                           <TextField source="address" />
                           <TextField source="transactiontypeId" />
                           <TextField label="UTXO" source="utxo.utxo" />
