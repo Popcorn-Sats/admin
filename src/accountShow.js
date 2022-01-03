@@ -124,7 +124,7 @@ export const AccountShow = (props) => {
                     <ReferenceManyField reference="transactions" target="_nested_account_id" >
                       <Datagrid rowClick="show">
                           <NumberField label="Block height" source="block.height" />
-                          <TextField label="Type" source="transactiontype.type" />
+                          <TextField label="Type" source="transactiontype" />
                           <TextField label="Category" source="category.name" />
                           <RichTextField source="description" />
                           <NumberField source="balance_change" />
