@@ -146,8 +146,8 @@ export const TransactionShow = (props) => {
                         <Datagrid>
                           <TextField label="Account" source="account.name" />
                           <NumberField source="amount" />
-                          <TextField source="address" />
-                          <TextField source="transactiontypeId" />
+                          <TextField label="Address" source="utxo.address.address" />
+                          {/* <TextField source="transactiontypeId" /> */}
                           <TextField label="UTXO" source="utxo.utxo" />
                         </Datagrid>
                       </ArrayField>
@@ -162,8 +162,8 @@ export const TransactionShow = (props) => {
                         <Datagrid>
                           <TextField label="Account" source="account.name" />
                           <NumberField source="amount" />
-                          <TextField source="address" />
-                          <TextField source="transactiontypeId" />
+                          <TextField label="Address" source="utxo.address.address" />
+                          {/* <TextField source="transactiontypeId" /> */}
                           <TextField label="UTXO" source="utxo.utxo" />
                         </Datagrid>
                       </ArrayField>
