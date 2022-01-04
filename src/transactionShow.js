@@ -43,7 +43,9 @@ export const TransactionShow = (props) => {
                     <Grid container spacing={1}>
                         <Grid item xs={12} sm={12} md={8}>
                             <Typography variant="h6" gutterBottom>
-                              <strong>Transaction</strong>
+                              <strong>Transaction—{<TextField
+                                            source="transactiontype"
+                                        />}</strong>
                             </Typography>
                             <Grid container>
                                 <Grid item xs={12} sm={12} md={6}>
