@@ -6,7 +6,7 @@ export const TransactionList = props => (
       <Datagrid rowClick="show">
           <NumberField label="Block height" source="block.height" />
           {/* <DateField label="Date" source="block.date" /> */}
-          <TextField label="Type" source="transactiontype.type" />
+          <TextField label="Type" source="transactiontype" />
           <TextField label="Category" source="category.name" />
           <RichTextField source="description" />
           <TextField source="balance_change" />
