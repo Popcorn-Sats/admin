@@ -9,7 +9,7 @@ export const TransactionEdit = (props) => (
   <Edit title={<TransactionTitle />} {...props}>
       <SimpleForm>
           <TextInput disabled source="id" />
-          <TextInput label="Category" source="category.id" />
+          <TextInput label="Category" source="category.name" />
           <TextInput multiline source="description" />
       </SimpleForm>
   </Edit>
