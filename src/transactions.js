@@ -1,5 +1,5 @@
 import * as React from "react"
-import { List, Datagrid, TextField, RichTextField, NumberField } from 'react-admin'
+import { List, Datagrid, TextField, RichTextField, NumberField, EditButton } from 'react-admin'
 
 export const TransactionList = props => (
   <List {...props}>
@@ -10,6 +10,7 @@ export const TransactionList = props => (
           <TextField label="Category" source="category.name" />
           <RichTextField source="description" />
           <TextField source="balance_change" />
+          <EditButton basePath="/transactions" />
           {/* <TextField source="txid" />
           <TextField source="address" />
           <TextField source="network_fee" />
