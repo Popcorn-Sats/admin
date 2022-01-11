@@ -5,6 +5,7 @@ import { AccountList } from "./accounts"
 import { AccountShow } from "./accountShow"
 import { CategoryList } from "./categories"
 import { CategoryShow } from "./categoryShow"
+import { CategoryEdit } from "./categoryEdit"
 import { TransactionList } from "./transactions"
 import { TransactionShow } from './transactionShow'
 import { TransactionEdit } from "./transactionEdit"
@@ -12,7 +13,7 @@ import { TransactionEdit } from "./transactionEdit"
 const App = () => (
   <Admin dataProvider={dataProvider}>
     <Resource name="accounts" list={AccountList} show={AccountShow} />
-    <Resource name="categories" list={CategoryList} show={CategoryShow} />
+    <Resource name="categories" list={CategoryList} show={CategoryShow} edit={CategoryEdit} />
     <Resource name="transactions" list={TransactionList} show={TransactionShow} edit={TransactionEdit} />
   </Admin>
 )
