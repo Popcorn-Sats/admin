@@ -31,12 +31,15 @@ export const AccountCreate = (props) => {
         <SimpleForm>
             <TextInput source="name" />
             <TextInput source="notes" />
+            <SelectInput source="accounttypeId" choices={accountTypes} />
             <DateInput source="birthday" />
             <BooleanInput source="active" defaultValue={true} />
             <BooleanInput source="owned" defaultValue={true} />
-            <TextInput label="Xpub" source="publicKey" />
+            <h2>HD wallet</h2>
+            <TextInput label="xpub" source="publicKey" />
             <SelectInput source="purpose" choices={outputScripts} />
-            <SelectInput source="accounttypeId" choices={accountTypes} />
+            <h2>Single Address</h2>
+            <TextInput source="address" />
         </SimpleForm>
     </Create>
   )
