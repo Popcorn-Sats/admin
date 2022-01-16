@@ -1,5 +1,5 @@
 import * as React from "react"
-import { useNotify, useRefresh, useRedirect, Edit, SimpleForm, TextInput, BooleanInput/* , ReferenceInput, SelectInput */ } from 'react-admin'
+import { useNotify, useRefresh, useRedirect, Edit, SimpleForm, TextInput, BooleanInput, SelectInput } from 'react-admin'
 
 const AccountTitle = ({ record }) => {
   return <span>Account {record ? `"${record.name}"` : ''}</span>;
@@ -16,6 +16,14 @@ export const AccountEdit = (props) => {
     refresh();
   };
 
+  const accountTypes = [
+    {id: 0, name: 'Fees'},
+    {id: 1, name: 'Wallet'},
+    {id: 2, name: 'Vault'},
+    {id: 3, name: 'Expense'},
+    {id: 4, name: 'Income'}
+  ]
+
   return (
     <Edit onSuccess={onSuccess} mutationMode="pessimistic" title={<AccountTitle />} {...props}>
         <SimpleForm>
@@ -24,8 +32,7 @@ export const AccountEdit = (props) => {
             <TextInput source="notes" />
             <BooleanInput source="active" />
             <BooleanInput source="owned" />
-            {/* <ReferenceInput label="Account Type" source="accounttype.name" reference="accounttypes"><SelectInput optionText="name"></SelectInput></ReferenceInput> */}
-            {/* TODO: hard-code or query account types */}
+            <SelectInput label="Account Type" source="accounttype.id" choices={accountTypes} />
         </SimpleForm>
     </Edit>
   )
