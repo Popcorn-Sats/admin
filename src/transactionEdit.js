@@ -2,7 +2,7 @@ import * as React from "react"
 import { Edit, ReferenceInput, SelectInput, SimpleForm, TextInput } from 'react-admin'
 
 const TransactionTitle = ({ record }) => {
-  return <span>Transaction {record ? `"${record.id}"` : ''}</span>;
+  return <span>Transaction {record?.description ? `"${record.description}"` : `${record.id}`}</span>;
 };
 
 export const TransactionEdit = (props) => (
