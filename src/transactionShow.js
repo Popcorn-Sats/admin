@@ -123,16 +123,16 @@ export const TransactionShow = (props) => {
                             <Typography variant="h6" gutterBottom>
                                 Something
                             </Typography>
-                            <ReferenceField
+                            {/* <ReferenceField
                                 source="address"
                                 resource="commands"
                                 reference="accounts"
                                 basePath="/accounts"
-                                /* record={formProps.record} */
+                                // record={formProps.record}
                                 link={false}
-                            >
+                            > */}
                                 <CustomerAddress />
-                            </ReferenceField>
+                            {/* </ReferenceField> */}
                         </Grid>
                     </Grid>
                     <Spacer />
