@@ -1,11 +1,7 @@
 import * as React from "react"
-import { useNotify, useRefresh, useRedirect, Edit, SimpleForm, TextInput } from 'react-admin'
+import { useNotify, useRefresh, useRedirect, Create, SimpleForm, TextInput } from 'react-admin'
 
-const CategoryTitle = ({ record }) => {
-  return <span>Category {record ? `"${record.id}"` : ''}</span>;
-};
-
-export const CategoryEdit = (props) => {
+export const CategoryCreate = (props) => {
   const notify = useNotify();
   const refresh = useRefresh();
   const redirect = useRedirect();
@@ -17,11 +13,11 @@ export const CategoryEdit = (props) => {
   };
 
   return (
-    <Edit onSuccess={onSuccess} mutationMode="pessimistic" title={<CategoryTitle />} {...props}>
+    <Create title="Create a new category" onSuccess={onSuccess} mutationMode="pessimistic" {...props}>
         <SimpleForm>
             <TextInput disabled source="id" />
             <TextInput source="name" />
         </SimpleForm>
-    </Edit>
+    </Create>
   )
 };
