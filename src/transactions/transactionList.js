@@ -1,7 +1,7 @@
 import * as React from "react"
 import { List, Datagrid, TextField, RichTextField, NumberField, EditButton } from 'react-admin'
 
-export const TransactionList = props => (
+const TransactionList = props => (
   <List {...props}>
       <Datagrid rowClick="show">
           <NumberField label="Block height" source="block.height" />
@@ -19,3 +19,5 @@ export const TransactionList = props => (
       </Datagrid>
   </List>
 )
+
+export default TransactionList
