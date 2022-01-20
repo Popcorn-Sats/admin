@@ -1,7 +1,7 @@
 import * as React from "react"
 import { List, Datagrid, TextField, DateField, BooleanField, RichTextField, ChipField, NumberField } from 'react-admin'
 
-export const AccountList = props => (
+const AccountList = props => (
   <List {...props}>
       <Datagrid rowClick="show">
           <TextField source="id" />
@@ -15,3 +15,5 @@ export const AccountList = props => (
       </Datagrid>
   </List>
 )
+
+export default AccountList
