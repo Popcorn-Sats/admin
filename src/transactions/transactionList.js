@@ -10,6 +10,7 @@ const TransactionList = props => (
           <TextField label="Category" source="category.name" />
           <RichTextField source="description" />
           <TextField source="balance_change" />
+          <NumberField source="runningBalance" />
           <EditButton basePath="/transactions" />
           {/* <TextField source="txid" />
           <TextField source="address" />

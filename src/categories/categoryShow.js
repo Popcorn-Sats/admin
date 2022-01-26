@@ -57,7 +57,6 @@ export const CategoryShow = (props) => {
                       <Datagrid rowClick="show">
                           <NumberField label="Block height" source="block.height" />
                           <TextField label="Type" source="transactiontype" />
-                          <TextField label="Category" source="category.name" />
                           <RichTextField source="description" />
                           <NumberField source="balance_change" />
                           <NumberField source="runningBalance" />
