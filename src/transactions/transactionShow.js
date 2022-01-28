@@ -9,7 +9,6 @@ import {
     ArrayField,
     NumberField,
     Datagrid,
-    useRecordContext,
 } from 'react-admin';
 import { Link as RouterLink } from 'react-router-dom';
 import {
@@ -35,12 +34,6 @@ const CustomerAddress = () => (
 
 const Spacer = () => <Box m={1}>&nbsp;</Box>;
 
-const RecordWithTimestampAsInteger = (props) => {
-    const { source } = props;
-    const record = useRecordContext(props);
-    return <span>{parseInt(record[source], 10)}</span>
-}
-
 export const TransactionShow = (props) => {
     return (
       <Show {...props}>
@@ -60,13 +53,10 @@ export const TransactionShow = (props) => {
                                         source="date"
                                         resource="commands"
                                     >
-                                        {/* <DateField
-                                            source="block.timestamp"
-                                        /> */}
-                                        <TextField
-                                            source="block.timestamp"
+                                        <DateField
+                                            source="timestamp"
+                                            showTime
                                         />
-                                        {/* <RecordWithTimestampAsInteger source="block.timestamp" /> */}
                                     </Labeled>
                                 </Grid>
                                 <Grid item xs={12} sm={12} md={6}>
