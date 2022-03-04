@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Show, Toolbar, TextField, RichTextField, NumberField, ReferenceManyField, Datagrid } from 'react-admin'
+import { Show, Toolbar, TextField, RichTextField, NumberField, ReferenceManyField, Datagrid, Pagination } from 'react-admin'
 import { makeStyles } from '@material-ui/core/styles'
 import {
   Card,
@@ -53,7 +53,7 @@ export const CategoryShow = (props) => {
                         </Grid>
                     </Grid>
                     <Spacer />
-                    <ReferenceManyField reference="transactions" target="_nested_category_id" >
+                    <ReferenceManyField pagination={<Pagination />} reference="transactions" target="_nested_category_id" >
                       <Datagrid rowClick="show">
                           <NumberField label="Block height" source="block.height" />
                           <TextField label="Type" source="transactiontype" />
