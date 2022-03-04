@@ -69,8 +69,7 @@ const dataProvider = {
 
         const url = `${apiUrl}/${refResource}?${stringify(query)}`;
 
-        return httpClient(url).then(({ headers, json }) => (
-          console.log(headers.get('content-range')),{
+        return httpClient(url).then(({ headers, json }) => ({
             data: json,
             total: parseInt(headers.get('content-range').split('/').pop(), 10),
         }));
