@@ -47,7 +47,17 @@ const dataProvider = {
     getManyReference: (resource, params) => {
         // Add the reference id to the filter params.
         let refResource;
-        let query = {};
+
+        const { page, perPage } = params.pagination;
+        const { field, order } = params.sort;
+        const query = {
+            sort: JSON.stringify([field, order]),
+            range: JSON.stringify([(page - 1) * perPage, page * perPage - 1]),
+            filter: JSON.stringify({
+                ...params.filter,
+                [params.target]: params.id,
+            }),
+        };
 
         const match = /_nested_(.*)_id/g.exec(params.target);
         if (match != null) {
@@ -59,22 +69,10 @@ const dataProvider = {
 
         const url = `${apiUrl}/${refResource}?${stringify(query)}`;
 
-        /* const { page, perPage } = params.pagination;
-        const { field, order } = params.sort;
-        const query = {
-            sort: JSON.stringify([field, order]),
-            range: JSON.stringify([(page - 1) * perPage, page * perPage - 1]),
-            filter: JSON.stringify({
-                ...params.filter,
-                [params.target]: params.id,
-            }),
-        };
-        const url = `${apiUrl}/${resource}?${stringify(query)}`; */
-
-        return httpClient(url).then(({ headers, json }) => ({
+        return httpClient(url).then(({ headers, json }) => (
+          console.log(headers.get('content-range')),{
             data: json,
-            total: 10,
-            // total: parseInt(headers.get('content-range').split('/').pop(), 10),
+            total: parseInt(headers.get('content-range').split('/').pop(), 10),
         }));
     },
 
