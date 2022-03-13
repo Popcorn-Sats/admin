@@ -26,20 +26,25 @@ const aggregateOrdersByDay = (orders: Order[]): { [key: string]: number } =>
     orders
         .filter((order: Order) => order.status !== 'cancelled')
         .reduce((acc, curr) => {
-            const day = format(curr.date, 'YYYY-MM-DD');
-            if (!acc[day]) {
-                acc[day] = 0;
+            const height = curr.block.height;
+            if (!acc[height]) {
+                acc[height] = 0;
             }
-            acc[day] += curr.total;
+            acc[height] += curr.runningBalance;
             return acc;
         }, {} as { [key: string]: number });
 
 const getRevenuePerDay = (orders: Order[]): TotalByDay[] => {
     const daysWithRevenue = aggregateOrdersByDay(orders);
-    return lastMonthDays.map(date => ({
+    console.log(daysWithRevenue);
+    return Object.keys(daysWithRevenue).map((day) => ({
+        date: Number(day),
+        total: daysWithRevenue[day],
+    }));
+    /* return lastMonthDays.map(date => ({
         date: date.getTime(),
         total: daysWithRevenue[format(date, 'YYYY-MM-DD')] || 0,
-    }));
+    })); */
 };
 
 const OrderChart: FC<{ orders?: Order[] }> = ({ orders }) => {
@@ -48,7 +53,7 @@ const OrderChart: FC<{ orders?: Order[] }> = ({ orders }) => {
 
     return (
         <Card>
-            <CardHeader title={translate('pos.dashboard.month_history')} />
+            <CardHeader title={translate('dashboard.net_position')} />
             <CardContent>
                 <div style={{ width: '100%', height: 300 }}>
                     <ResponsiveContainer>
@@ -75,27 +80,27 @@ const OrderChart: FC<{ orders?: Order[] }> = ({ orders }) => {
                             </defs>
                             <XAxis
                                 dataKey="date"
-                                name="Date"
-                                type="number"
-                                scale="time"
-                                domain={[
+                                name="Block Height"
+                                // type="number"
+                                // scale="time"
+                                /* domain={[
                                     addDays(aMonthAgo, 1).getTime(),
                                     new Date().getTime(),
                                 ]}
-                                tickFormatter={dateFormatter}
+                                tickFormatter={dateFormatter} */
                             />
-                            <YAxis dataKey="total" name="Revenue" unit="€" />
+                            <YAxis dataKey="total" name="Net Position" unit="sats" />
                             <CartesianGrid strokeDasharray="3 3" />
                             <Tooltip
                                 cursor={{ strokeDasharray: '3 3' }}
                                 formatter={(value: any): string =>
                                     new Intl.NumberFormat(undefined, {
                                         style: 'currency',
-                                        currency: 'USD',
+                                        currency: 'BTC',
                                     }).format(value as any)
                                 }
                                 labelFormatter={(label: any): string =>
-                                    dateFormatter(label)
+                                    format(label as any)
                                 }
                             />
                             <Area
