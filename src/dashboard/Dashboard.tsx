@@ -7,11 +7,11 @@ import React, {
 } from 'react';
 import { useVersion, useDataProvider } from 'react-admin';
 import { useMediaQuery, Theme } from '@material-ui/core';
-/* import { EventRecord } from '@react-admin/ra-audit-log';
-import Timeline from './Timeline';
-import Welcome from './Welcome';
+// import { EventRecord } from '@react-admin/ra-audit-log';
+// import Timeline from './Timeline';
+// import Welcome from './Welcome';
 import MonthlyRevenue from './MonthlyRevenue';
-import NbNewOrders from './NbNewOrders';
+/* import NbNewOrders from './NbNewOrders';
 import PendingOrders from './PendingOrders';
 import PendingReviews, { NbPendingReviews } from './PendingReviews';
 import NewCustomers, { NbNewCustomers } from './NewCustomers'; */
@@ -173,9 +173,9 @@ const Dashboard = (): ReactElement => {
   return isXSmall ? (
       <div>
           <div style={styles.flexColumn as CSSProperties}>
-              {/* <Welcome />
+              {/* <Welcome /> */}
               <MonthlyRevenue value={revenue} />
-              <VerticalSpacer />
+              {/* <VerticalSpacer />
               <NbNewOrders value={nbNewOrders} />
               <VerticalSpacer />
               <PendingOrders
@@ -192,8 +192,8 @@ const Dashboard = (): ReactElement => {
               {/* <Welcome /> */}
           </div>
           <div style={styles.flex}>
-              {/* <MonthlyRevenue value={revenue} />
-              <Spacer />
+              <MonthlyRevenue value={revenue} />
+              {/* <Spacer />
               <NbNewOrders value={nbNewOrders} /> */}
           </div>
           <div style={styles.singleCol}>
@@ -216,8 +216,8 @@ const Dashboard = (): ReactElement => {
           <div style={styles.flex}>
               <div style={styles.leftCol}>
                   <div style={styles.flex}>
-                      {/* <MonthlyRevenue value={revenue} />
-                      <Spacer />
+                      <MonthlyRevenue value={revenue} />
+                      {/* <Spacer />
                       <NbNewOrders value={nbNewOrders} />
                       <Spacer />
                       <NbPendingReviews value={nbPendingReviews} />
