@@ -105,7 +105,7 @@ const Dashboard = (): ReactElement => {
           nbNewOrders: aggregations.nbNewOrders,
           pendingOrders: aggregations.pendingOrders,
       }));
-      const { data: customers } = await dataProvider.getMany<Customer>(
+      /* const { data: customers } = await dataProvider.getMany<Customer>(
           'customers',
           {
               ids: aggregations.pendingOrders.map(
@@ -122,10 +122,10 @@ const Dashboard = (): ReactElement => {
               },
               {}
           ),
-      }));
+      })); */
   }, [dataProvider]);
 
-  const fetchReviews = useCallback(async () => {
+  /* const fetchReviews = useCallback(async () => {
       const { data: reviews } = await dataProvider.getList<Review>(
           'reviews',
           {
@@ -153,11 +153,11 @@ const Dashboard = (): ReactElement => {
               {}
           ),
       }));
-  }, [dataProvider]);
+  }, [dataProvider]); */
 
   useEffect(() => {
       fetchOrders();
-      fetchReviews();
+      // fetchReviews();
   }, [version]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const {
