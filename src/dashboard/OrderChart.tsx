@@ -95,12 +95,11 @@ const OrderChart: FC<{ orders?: Order[] }> = ({ orders }) => {
                                 cursor={{ strokeDasharray: '3 3' }}
                                 formatter={(value: any): string =>
                                     new Intl.NumberFormat(undefined, {
-                                        style: 'currency',
-                                        currency: 'BTC',
                                     }).format(value as any)
                                 }
                                 labelFormatter={(label: any): string =>
-                                    format(label as any)
+                                  new Intl.NumberFormat(undefined, {
+                                  }).format(label as any)
                                 }
                             />
                             <Area
