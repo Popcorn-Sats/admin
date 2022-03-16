@@ -5,6 +5,7 @@ import {
     ResponsiveContainer,
     PieChart,
     Pie,
+    Tooltip,
 } from 'recharts';
 import { useTranslate, useDataProvider } from 'react-admin';
 
@@ -64,8 +65,8 @@ const CategoryChart = () => {
                                 cy="50%"
                                 outerRadius={80}
                                 fill="#8884d8"
-                                label
                             />
+                            <Tooltip />
                         </PieChart>
                     </ResponsiveContainer>
                 </div>
