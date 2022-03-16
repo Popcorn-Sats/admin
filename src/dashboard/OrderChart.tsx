@@ -57,7 +57,10 @@ const OrderChart: FC<{ orders?: Order[] }> = ({ orders }) => {
             <CardContent>
                 <div style={{ width: '100%', height: 300 }}>
                     <ResponsiveContainer>
-                        <AreaChart data={getRevenuePerDay(orders)}>
+                        <AreaChart 
+                          data={getRevenuePerDay(orders)}
+                          margin={{ top: 15, right: 30, left: 100, bottom: 40 }}
+                        >
                             <defs>
                                 <linearGradient
                                     id="colorUv"
@@ -81,6 +84,7 @@ const OrderChart: FC<{ orders?: Order[] }> = ({ orders }) => {
                             <XAxis
                                 dataKey="date"
                                 name="Block Height"
+                                label={{ value: 'Block Height', offset: -20, position: 'insideBottom' }}
                                 // type="number"
                                 // scale="time"
                                 /* domain={[
@@ -89,7 +93,11 @@ const OrderChart: FC<{ orders?: Order[] }> = ({ orders }) => {
                                 ]}
                                 tickFormatter={dateFormatter} */
                             />
-                            <YAxis dataKey="total" name="Net Position" unit="sats" />
+                            <YAxis 
+                              dataKey="total" 
+                              name="Net Position" 
+                              unit=" sats"
+                              label={{ value: 'Net worth', offset: -80, angle: -90, position: 'insideLeft' }} />
                             <CartesianGrid strokeDasharray="3 3" />
                             <Tooltip
                                 cursor={{ strokeDasharray: '3 3' }}
