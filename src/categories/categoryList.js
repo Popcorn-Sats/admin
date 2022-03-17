@@ -1,6 +1,7 @@
 import * as React from "react"
 import { List, Datagrid, TextField } from 'react-admin'
 import CategoryChart from "./CategoryPie"
+import CategoryBar from "./CategoryBar"
 
 const styles = {
   flex: { display: 'flex' },
@@ -15,10 +16,11 @@ const VerticalSpacer = () => <span style={{ height: '1em' }} />;
 
 const CategoryList = props => (
   <>
-    {/* <div style={styles.flex}> */}
+    <div style={styles.flex}>
       <CategoryChart />
       <Spacer />
-    {/* </div> */}
+      <CategoryBar />
+    </div>
     <div style={styles.singleCol}>
       <List {...props}>
           <Datagrid rowClick="show">
