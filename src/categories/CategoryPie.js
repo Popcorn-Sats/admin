@@ -122,7 +122,7 @@ const CategoryChart = () => {
                                 activeIndex={activeIndex}
                                 activeShape={renderActiveShape}
                                 data={flipNegValues(data)}
-                                dataKey="balance" // FIXME: Need to set 0 as default value for balance.
+                                dataKey="balance"
                                 nameKey="name"
                                 cx="50%"
                                 cy="50%"
