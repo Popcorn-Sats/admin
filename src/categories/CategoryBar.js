@@ -93,7 +93,7 @@ const CategoryBar = () => {
 
     return (
         <Card>
-            <CardHeader title={translate('dashboard.monthly_expenditure')} />
+            <CardHeader title={translate('dashboard.transaction_summary')} />
             <CardContent>
                 <div style={{ width: '100%', height: 300 }}>
                     <ResponsiveContainer>
