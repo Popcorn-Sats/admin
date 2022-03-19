@@ -16,6 +16,7 @@ import PendingOrders from './PendingOrders';
 import PendingReviews, { NbPendingReviews } from './PendingReviews';
 import NewCustomers, { NbNewCustomers } from './NewCustomers'; */
 import OrderChart from './OrderChart';
+import NetWorthChart from './NetWorthChart';
 
 import type { Customer, Order, Review } from '../types';
 
@@ -217,8 +218,7 @@ const Dashboard = (): ReactElement => {
               <div style={styles.leftCol}>
                   <div style={styles.flex}>
                       <MonthlyRevenue value={revenue} />
-                      {/* <Spacer />
-                      <NbNewOrders value={nbNewOrders} />
+                      {/* <NbNewOrders value={nbNewOrders} />
                       <Spacer />
                       <NbPendingReviews value={nbPendingReviews} />
                       <Spacer />
@@ -226,6 +226,8 @@ const Dashboard = (): ReactElement => {
                   </div>
                   <div style={styles.singleCol}>
                       <OrderChart orders={recentOrders} />
+                      <VerticalSpacer />
+                      <NetWorthChart orders={recentOrders} />
                   </div>
                   <div style={styles.flex}>
                       {/* <PendingOrders
