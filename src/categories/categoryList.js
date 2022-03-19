@@ -6,6 +6,8 @@ import CategoryBar from "./CategoryBar"
 const styles = {
   flex: { display: 'flex' },
   flexColumn: { display: 'flex', flexDirection: 'column' },
+  flexPie: { flex: 2 },
+  flexBar: { flex: 3 },
   leftCol: { flex: 1, marginRight: '0.5em' },
   rightCol: { marginLeft: '0.5em', maxWidth: '30em' },
   singleCol: { marginTop: '1em', marginBottom: '1em' },
@@ -17,9 +19,13 @@ const VerticalSpacer = () => <span style={{ height: '1em' }} />;
 const CategoryList = props => (
   <>
     <div style={styles.flex}>
-      <CategoryChart />
+      <div style={styles.flexPie}>
+        <CategoryChart />
+      </div>
       <Spacer />
-      <CategoryBar />
+      <div style={styles.flexBar}>
+        <CategoryBar />
+      </div>
     </div>
     <div style={styles.singleCol}>
       <List {...props}>
