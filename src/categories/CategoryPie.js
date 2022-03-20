@@ -33,9 +33,6 @@ const renderActiveShape = (props) => {
 
   return (
     <g>
-      <text x={cx} y={cy} dy={8} textAnchor="middle" fill={fill}>
-        {payload.name}
-      </text>
       <Sector
         cx={cx}
         cy={cy}
@@ -76,7 +73,7 @@ const CategoryChart = () => {
       const categories = await dataProvider.getList(
         'categories',
         {
-            sort: { field: 'date', order: 'DESC' },
+            sort: { field: 'name', order: 'DESC' },
             pagination: { page: 1, perPage: 50 }, // TODO: Decide reasonable limit here and order by balance
         }
       )
