@@ -13,8 +13,8 @@ import { useMediaQuery, Theme } from '@material-ui/core';
 import MonthlyRevenue from './MonthlyRevenue';
 /* import NbNewOrders from './NbNewOrders';
 import PendingOrders from './PendingOrders';
-import PendingReviews, { NbPendingReviews } from './PendingReviews';
-import NewCustomers, { NbNewCustomers } from './NewCustomers'; */
+import PendingReviews, { NbPendingReviews } from './PendingReviews'; */
+import NewTransactions from './NewTransactions';
 import OrderChart from './OrderChart';
 import NetWorthChart from './NetWorthChart';
 
@@ -213,16 +213,14 @@ const Dashboard = (): ReactElement => {
   ) : (
       <>
           {/* <Welcome /> */}
-          <h1>Test</h1>
+          <h1>Dashboard</h1>
           <div style={styles.flex}>
               <div style={styles.leftCol}>
                   <div style={styles.flex}>
                       <MonthlyRevenue value={revenue} />
-                      {/* <NbNewOrders value={nbNewOrders} />
-                      <Spacer />
-                      <NbPendingReviews value={nbPendingReviews} />
-                      <Spacer />
-                      <NbNewCustomers /> */}
+                      {/* <Spacer />
+                      <NbNewOrders value={nbNewOrders} />
+                      */}
                   </div>
                   <div style={styles.singleCol}>
                       <OrderChart orders={recentOrders} />
@@ -240,11 +238,13 @@ const Dashboard = (): ReactElement => {
                           customers={pendingReviewsCustomers}
                       />
                       <Spacer />
-                      <NewCustomers /> */}
+                      <NewTransactions /> */}
                   </div>
               </div>
               <div style={styles.rightCol}>
-                  {/* <Timeline /> */}
+                {/* <Timeline />
+                <Spacer /> */}
+                <NewTransactions />
               </div>
           </div>
       </>
