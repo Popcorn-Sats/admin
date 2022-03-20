@@ -113,9 +113,9 @@ const CategoryBar = () => {
                         <YAxis />
                         <Tooltip />
                         <Legend />
-                        <Bar dataKey="Coinjoin" stackId="a" fill="#8884d8" />
-                        <Bar dataKey="Fees" stackId="a" fill="#82ca9d" />
-                        <Bar dataKey="Income" fill="#ffc658" />
+                        <Bar dataKey="Coinjoin" stackId="a" fill="#f49097" />
+                        <Bar dataKey="Fees" stackId="a" fill="#dfb2f4" />
+                        <Bar dataKey="Income" fill="#f5e960" />
                       </BarChart>
                     </ResponsiveContainer>
                 </div>

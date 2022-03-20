@@ -109,7 +109,7 @@ const CategoryChart = () => {
 
     const data = categories.data || testData; // FIXME: This is a hack to get the chart to render. Need to send data in props.
 
-    const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+    const COLORS = ['#f49097', '#dfb2f4', '#f5e960', '#f2f5ff','#55d6c2'];
 
     return (
         <Card>
