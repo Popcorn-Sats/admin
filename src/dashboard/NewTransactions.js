@@ -47,7 +47,7 @@ const NewTransactions = () => {
         <CardWithIcon
             to="/transactions"
             icon={CustomerIcon}
-            title={translate('pos.dashboard.new_transactions')}
+            title={translate('dashboard.new_transactions')}
             subtitle={nb}
         >
             <List>
@@ -79,7 +79,7 @@ const NewTransactions = () => {
                 color="primary"
             >
                 <Box p={1} className={classes.linkContent}>
-                    {translate('pos.dashboard.all_transactions')}
+                    {translate('dashboard.all_transactions')}
                 </Box>
             </Button>
         </CardWithIcon>
