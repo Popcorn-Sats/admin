@@ -1,5 +1,5 @@
 import * as React from "react"
-import { List, Datagrid, TextField } from 'react-admin'
+import { List, Datagrid, TextField, TextInput } from 'react-admin'
 import CategoryChart from "./CategoryPie"
 import CategoryBar from "./CategoryBar"
 
@@ -16,6 +16,11 @@ const styles = {
 const Spacer = () => <span style={{ width: '1em' }} />;
 const VerticalSpacer = () => <span style={{ height: '1em' }} />;
 
+const categoryFilters = [
+  // <TextInput label="Search" source="q" alwaysOn />,
+  <TextInput label="Category Name" source="name" />,
+];
+
 const CategoryList = props => (
   <>
     <div style={styles.flex}>
@@ -28,11 +33,11 @@ const CategoryList = props => (
       </div>
     </div>
     <div style={styles.singleCol}>
-      <List {...props}>
+      <List {...props} filters={categoryFilters}>
           <Datagrid rowClick="show">
                 <TextField source="id" />
                 <TextField source="name" />
-                <TextField source="balance" />
+                <TextField source="balance" sortable={false} />
           </Datagrid>
       </List>
     </div>
