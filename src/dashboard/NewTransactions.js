@@ -16,6 +16,26 @@ import { subDays } from 'date-fns';
 
 import CardWithIcon from './CardWithIcon';
 
+import Transfer from '@material-ui/icons/CompareArrows';
+import Deposit from '@material-ui/icons/CallReceived';
+import Coinjoin from '@material-ui/icons/CallMerge';
+import Withdrawal from '@material-ui/icons/CallMade';
+
+const TransactionType = ({transactiontype}) => {
+    switch (transactiontype) {
+        case 'transfer':
+            return <Transfer />;
+        case 'deposit':
+            return <Deposit />;
+        case 'withdrawal':
+            return <Withdrawal />;
+        case 'coinjoin':
+            return <Coinjoin />;
+        default:
+            return <Transfer />;
+    }
+}
+
 const NewTransactions = () => {
     const translate = useTranslate();
     const classes = useStyles();
@@ -60,7 +80,7 @@ const NewTransactions = () => {
                               key={record.id}
                           >
                               <ListItemAvatar>
-                                  <Avatar src={`${record.avatar}?size=32x32`} /> {/* Map icons for record.transactiontype */}
+                                <TransactionType transactiontype={record.transactiontype} />
                               </ListItemAvatar>
                               <ListItemText
                                   primary={`Balance change: ${record.balance_change}`}
