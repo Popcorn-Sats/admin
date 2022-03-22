@@ -198,7 +198,7 @@ const Dashboard = (): ReactElement => {
               <NbNewOrders value={nbNewOrders} /> */}
           </div>
           <div style={styles.singleCol}>
-              <OrderChart orders={recentOrders} />
+            <NetWorthChart orders={recentOrders} />
           </div>
           <div style={styles.singleCol}>
               {/* <PendingOrders
@@ -223,8 +223,6 @@ const Dashboard = (): ReactElement => {
                       */}
                   </div>
                   <div style={styles.singleCol}>
-                      <OrderChart orders={recentOrders} />
-                      <VerticalSpacer />
                       <NetWorthChart orders={recentOrders} />
                   </div>
                   <div style={styles.flex}>
