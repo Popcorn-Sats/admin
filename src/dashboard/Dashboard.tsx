@@ -81,7 +81,7 @@ const Dashboard = (): ReactElement => {
           .reduce(
               (stats: OrderStats, order) => {
                   if (order.status !== 'cancelled') {
-                      stats.revenue += order.total;
+                      stats.revenue += order.balance_change;
                       stats.nbNewOrders++;
                   }
                   if (order.status === 'ordered') {
@@ -98,12 +98,13 @@ const Dashboard = (): ReactElement => {
       setState(state => ({
           ...state,
           recentOrders,
-          revenue: aggregations.revenue.toLocaleString(undefined, {
+          revenue: aggregations.revenue.toLocaleString(),
+          /* revenue: aggregations.revenue.toLocaleString(undefined, {
               style: 'currency',
               currency: 'USD',
               minimumFractionDigits: 0,
               maximumFractionDigits: 0,
-          }),
+          }), */
           nbNewOrders: aggregations.nbNewOrders,
           pendingOrders: aggregations.pendingOrders,
       }));
