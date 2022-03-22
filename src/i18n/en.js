@@ -4,6 +4,7 @@ const customEnglishMessages = {
     ...englishMessages,
     dashboard: {
       net_position: 'Net Position',
+      monthly_revenue: 'Monthly Revenue',
       monthly_expenditure: 'Monthly Expenditure',
       transaction_summary: 'Transaction Summary',
       new_transactions: 'New Transactions',

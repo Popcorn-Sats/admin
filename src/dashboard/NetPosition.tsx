@@ -1,6 +1,6 @@
 
 import * as React from 'react';
-import BitcoinIcon from '@material-ui/icons/ShowChart';
+import AccountBalance from '@material-ui/icons/AccountBalance';
 import { useTranslate } from 'react-admin';
 
 import CardWithIcon from './CardWithIcon';
@@ -9,17 +9,17 @@ interface Props {
     value?: string;
 }
 
-const MonthlyRevenue = (props: Props) => {
+const NetPosition = (props: Props) => {
     const { value } = props;
     const translate = useTranslate();
     return (
         <CardWithIcon
             to="/commands"
-            icon={BitcoinIcon}
-            title={translate('dashboard.monthly_revenue')}
+            icon={AccountBalance}
+            title={translate('dashboard.net_position')}
             subtitle={value}
         />
     );
 };
 
-export default MonthlyRevenue;
+export default NetPosition;

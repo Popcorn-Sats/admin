@@ -11,11 +11,12 @@ import { useMediaQuery, Theme } from '@material-ui/core';
 // import Timeline from './Timeline';
 // import Welcome from './Welcome';
 import MonthlyRevenue from './MonthlyRevenue';
+import NetPosition from './NetPosition';
 /* import NbNewOrders from './NbNewOrders';
 import PendingOrders from './PendingOrders';
 import PendingReviews, { NbPendingReviews } from './PendingReviews'; */
 import NewTransactions from './NewTransactions';
-import OrderChart from './OrderChart';
+// import OrderChart from './OrderChart';
 import NetWorthChart from './NetWorthChart';
 
 import type { Customer, Order, Review } from '../types';
@@ -218,9 +219,8 @@ const Dashboard = (): ReactElement => {
               <div style={styles.leftCol}>
                   <div style={styles.flex}>
                       <MonthlyRevenue value={revenue} />
-                      {/* <Spacer />
-                      <NbNewOrders value={nbNewOrders} />
-                      */}
+                      <Spacer />
+                      <NetPosition value={revenue} />
                   </div>
                   <div style={styles.singleCol}>
                       <NetWorthChart orders={recentOrders} />
