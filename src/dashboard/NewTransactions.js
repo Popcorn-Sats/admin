@@ -9,7 +9,7 @@ import {
     ListItemText,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import CustomerIcon from '@material-ui/icons/PersonAdd';
+import TransactionIcon from '@material-ui/icons/Payment';
 import { Link } from 'react-router-dom';
 import { useTranslate, useQueryWithStore } from 'react-admin';
 import { subDays } from 'date-fns';
@@ -36,7 +36,7 @@ const NewTransactions = () => {
                 first_seen_gte: aMonthAgo.toISOString(),
             },
             sort: { field: 'first_seen', order: 'DESC' },
-            pagination: { page: 1, perPage: 20 },
+            pagination: { page: 1, perPage: 10 },
         },
     });
 
@@ -46,7 +46,7 @@ const NewTransactions = () => {
     return (
         <CardWithIcon
             to="/transactions"
-            icon={CustomerIcon}
+            icon={TransactionIcon}
             title={translate('dashboard.new_transactions')}
             subtitle={nb}
         >
