@@ -15,8 +15,8 @@ const AccountList = props => (
           <DateField source="birthday" />
           <BooleanField source="active" />
           <BooleanField source="owned" />
-          <ChipField label="Type" source="accounttype.name" />
-          <NumberField label="Balance (sats)" source="balance" />
+          <ChipField label="Type" source="accounttype.name" sortable={false} />
+          <NumberField label="Balance (sats)" source="balance" sortable={false} />
       </Datagrid>
   </List>
 )
