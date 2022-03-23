@@ -1,8 +1,13 @@
 import * as React from "react"
-import { List, Datagrid, TextField, DateField, BooleanField, RichTextField, ChipField, NumberField } from 'react-admin'
+import { List, Datagrid, TextField, DateField, BooleanField, RichTextField, ChipField, NumberField, TextInput } from 'react-admin'
+
+const accountFilters = [
+  // <TextInput label="Search" source="q" alwaysOn />,
+  <TextInput label="Account Name" source="name" />,
+];
 
 const AccountList = props => (
-  <List {...props}>
+  <List {...props} filters={accountFilters}>
       <Datagrid rowClick="show">
           <TextField source="id" />
           <TextField source="name" />
