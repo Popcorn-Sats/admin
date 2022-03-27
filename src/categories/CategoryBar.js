@@ -24,7 +24,7 @@ const CategoryBar = () => {
       const categories = await dataProvider.getList(
         'categories',
         {
-            sort: { field: 'date', order: 'DESC' },
+            sort: { field: 'name', order: 'DESC' }, // FIXME: Change back to date
             pagination: { page: 1, perPage: 50 }, // TODO: Decide reasonable limit here and order by balance
         }
       )
