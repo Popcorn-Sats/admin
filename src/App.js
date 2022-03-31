@@ -3,6 +3,7 @@ import { Admin, Resource } from 'react-admin'
 import polyglotI18nProvider from 'ra-i18n-polyglot'
 
 import dataProvider from './dataProvider'
+import { authProvider } from "./authProvider"
 import accounts from './accounts'
 import categories from './categories'
 import transactions from './transactions'
@@ -19,7 +20,7 @@ const i18nProvider = polyglotI18nProvider(locale => {
 }, 'en');
 
 const App = () => (
-  <Admin dataProvider={dataProvider} i18nProvider={i18nProvider} dashboard={Dashboard}>
+  <Admin dataProvider={dataProvider} authProvider={authProvider} i18nProvider={i18nProvider} dashboard={Dashboard}>
     <Resource name="accounts" {...accounts} />
     <Resource name="categories" {...categories} />
     <Resource name="transactions" {...transactions} />
