@@ -71,8 +71,8 @@ const Dashboard = (): ReactElement => {
       const { data: recentOrders } = await dataProvider.getList<Order>(
           'transactions',
           {
-              filter: { date_gte: aMonthAgo.toISOString() },
-              sort: { field: 'date', order: 'DESC' },
+              filter: { /* date_gte: aMonthAgo.toISOString() */ },
+              sort: { field: 'id', order: 'DESC' },
               pagination: { page: 1, perPage: 50 },
           }
       );

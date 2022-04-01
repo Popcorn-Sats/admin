@@ -50,11 +50,11 @@ const NewTransactions = () => {
         type: 'getList',
         resource: 'transactions',
         payload: {
-            filter: {
+            /* filter: {
                 has_ordered: true,
                 first_seen_gte: aMonthAgo.toISOString(),
-            },
-            sort: { field: 'first_seen', order: 'DESC' },
+            }, */
+            sort: { field: 'id', order: 'DESC' },
             pagination: { page: 1, perPage: 10 },
         },
     });
