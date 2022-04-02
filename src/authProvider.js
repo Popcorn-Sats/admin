@@ -1,5 +1,5 @@
 export const httpClient = () => {
-  const { token } = JSON.parse(localStorage.getItem('auth')) || {};
+  const { token } = JSON.parse(localStorage.getItem('popcornAuth')) || {};
   return { Authorization: `Bearer ${token}` };
 };
 
@@ -24,7 +24,7 @@ export const authProvider = {
       })
       .then((auth) => {
         localStorage.setItem(
-          'auth',
+          'popcornAuth',
           JSON.stringify({ ...auth, fullName: username })
         );
       })
@@ -35,23 +35,23 @@ export const authProvider = {
   checkError: (error) => {
     const status = error.status;
     if (status === 401 || status === 403) {
-      localStorage.removeItem('auth');
+      localStorage.removeItem('popcornAuth');
       return Promise.reject();
     }
     // other error code (404, 500, etc): no need to log out
     return Promise.resolve();
   },
   checkAuth: () =>
-    localStorage.getItem('auth')
+    localStorage.getItem('popcornAuth')
       ? Promise.resolve()
       : Promise.reject({ message: 'login required' }),
   logout: () => {
-    localStorage.removeItem('auth');
+    localStorage.removeItem('popcornAuth');
     return Promise.resolve();
   },
   getIdentity: () => {
     try {
-      const { id, fullName, avatar } = JSON.parse(localStorage.getItem('auth'));
+      const { id, fullName, avatar } = JSON.parse(localStorage.getItem('popcornAuth'));
       return Promise.resolve({ id, fullName, avatar });
     } catch (error) {
       return Promise.reject(error);
