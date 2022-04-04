@@ -35,6 +35,7 @@ export const authProvider = {
   checkError: (error) => {
     const status = error.status;
     if (status === 401 || status === 403) {
+      // TODO: JWT refresh
       localStorage.removeItem('popcornAuth');
       return Promise.reject();
     }
