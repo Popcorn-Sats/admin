@@ -1,3 +1,5 @@
+import inMemoryJwt from "./services/modules/inMemoryJwt";
+
 export const httpClient = () => {
   const { token } = JSON.parse(localStorage.getItem('popcornAuth')) || {};
   return { Authorization: `Bearer ${token}` };
@@ -23,10 +25,12 @@ export const authProvider = {
         return response.json();
       })
       .then((auth) => {
-        localStorage.setItem(
+        /* localStorage.setItem(
           'popcornAuth',
           JSON.stringify({ ...auth, fullName: username })
-        );
+        ) */
+        // TODO: Handle other auth items
+        inMemoryJwt.setToken(auth.accessToken);
       })
       .catch(() => {
         throw new Error('Network error');
@@ -36,18 +40,22 @@ export const authProvider = {
     const status = error.status;
     if (status === 401 || status === 403) {
       // TODO: JWT refresh
-      localStorage.removeItem('popcornAuth');
+      // localStorage.removeItem('popcornAuth');
+      inMemoryJwt.eraseToken();
       return Promise.reject();
     }
     // other error code (404, 500, etc): no need to log out
     return Promise.resolve();
   },
-  checkAuth: () =>
-    localStorage.getItem('popcornAuth')
+  checkAuth: () => {
+    /* localStorage.getItem('popcornAuth')
       ? Promise.resolve()
-      : Promise.reject({ message: 'login required' }),
+      : Promise.reject({ message: 'login required' }), */
+    return inMemoryJwt.getToken() ? Promise.resolve() : Promise.reject({ message: 'login required' })
+  },
   logout: () => {
-    localStorage.removeItem('popcornAuth');
+    // localStorage.removeItem('popcornAuth');
+    inMemoryJwt.eraseToken();
     return Promise.resolve();
   },
   getIdentity: () => {
@@ -64,5 +72,7 @@ export const authProvider = {
       return Promise.reject(error);
     }
   },
-  getPermissions: (params) => Promise.resolve(),
-};
+  getPermissions: () => {
+    return inMemoryJwt.getToken() ? Promise.resolve() : Promise.reject();
+  },
+}

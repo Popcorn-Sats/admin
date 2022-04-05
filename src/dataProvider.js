@@ -1,5 +1,6 @@
 import { fetchUtils } from 'react-admin'
 import { stringify } from 'query-string'
+import inMemoryJwt from './services/modules/inMemoryJwt'
 
 // TODO: Add to config file
 const apiUrl = 'http://localhost:2121'
@@ -8,8 +9,11 @@ const httpClient = (url, options = {}) => {
   if (!options.headers) {
       options.headers = new Headers({ Accept: 'application/json' });
   }
-  const { accessToken } = JSON.parse(localStorage.getItem('popcornAuth')) || {}
-  options.headers.set('Authorization', `Bearer ${accessToken}`);
+  // const { accessToken } = JSON.parse(localStorage.getItem('popcornAuth')) || {}
+  const accessToken = inMemoryJwt.getToken()
+  if (accessToken) {
+    options.headers.set('Authorization', `Bearer ${accessToken}`);
+  }
   return fetchUtils.fetchJson(url, options);
 }
 
