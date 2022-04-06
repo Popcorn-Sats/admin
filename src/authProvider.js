@@ -3,7 +3,7 @@ import inMemoryJwt from "./services/modules/inMemoryJwt";
 export const httpClient = () => {
   const { token } = JSON.parse(localStorage.getItem('popcornAuth')) || {};
   return { Authorization: `Bearer ${token}` };
-};
+}; // FIXME: Kill this?
 
 export const authProvider = {
   // authentication
@@ -15,8 +15,10 @@ export const authProvider = {
         method: 'POST',
         body: JSON.stringify({ username, password }),
         headers: new Headers({ 'Content-Type': 'application/json' }),
+        // credentials: 'include',
       }
     );
+    inMemoryJwt.setRefreshTokenEndpoint('http://localhost:2121/users/refreshtoken')
     return fetch(request)
       .then((response) => {
         if (response.status < 200 || response.status >= 300) {
@@ -24,13 +26,13 @@ export const authProvider = {
         }
         return response.json();
       })
-      .then((auth) => {
+      .then(({accessToken, tokenExpiry, refreshToken}) => {
         /* localStorage.setItem(
           'popcornAuth',
           JSON.stringify({ ...auth, fullName: username })
         ) */
         // TODO: Handle other auth items
-        inMemoryJwt.setToken(auth.accessToken);
+        inMemoryJwt.setToken(accessToken, tokenExpiry, refreshToken);
       })
       .catch(() => {
         throw new Error('Network error');
@@ -39,7 +41,6 @@ export const authProvider = {
   checkError: (error) => {
     const status = error.status;
     if (status === 401 || status === 403) {
-      // TODO: JWT refresh
       // localStorage.removeItem('popcornAuth');
       inMemoryJwt.eraseToken();
       return Promise.reject();
