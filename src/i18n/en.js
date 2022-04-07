@@ -14,6 +14,9 @@ const customEnglishMessages = {
               'by %{customer_name}, one item |||| by %{customer_name}, %{nb_items} items',
       },
     },
+    authentication: {
+      expired: 'Your session has expired. Please log in again.',
+    }
 };
 
 export default customEnglishMessages;

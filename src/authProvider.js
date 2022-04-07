@@ -58,7 +58,7 @@ export const authProvider = {
     if (!inMemoryJwt.getToken()) {
       inMemoryJwt.setRefreshTokenEndpoint(endpoints.refreshJwt);
       return inMemoryJwt.getRefreshedToken().then(tokenHasBeenRefreshed => {
-        return tokenHasBeenRefreshed ? Promise.resolve() : Promise.reject({ message: 'You must log in to continue' });
+        return tokenHasBeenRefreshed ? Promise.resolve() : Promise.reject({ message: 'authentication.expired' });
       });
     } else {
       return Promise.resolve();
