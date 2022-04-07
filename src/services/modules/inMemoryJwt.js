@@ -84,6 +84,7 @@ const inMemoryJWTManager = () => {
       getToken,
       setLogoutEventName,
       setRefreshTokenEndpoint,
+      getRefreshedToken,
       setToken,
   }
 }

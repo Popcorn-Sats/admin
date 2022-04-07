@@ -49,10 +49,15 @@ export const authProvider = {
     return Promise.resolve();
   },
   checkAuth: () => {
-    /* localStorage.getItem('popcornAuth')
-      ? Promise.resolve()
-      : Promise.reject({ message: 'login required' }), */
-    return inMemoryJwt.getToken() ? Promise.resolve() : Promise.reject({ message: 'login required' })
+    console.log('checkAuth');
+    if (!inMemoryJwt.getToken()) {
+      inMemoryJwt.setRefreshTokenEndpoint('http://localhost:2121/users/refreshtoken');
+      return inMemoryJwt.getRefreshedToken().then(tokenHasBeenRefreshed => {
+        return tokenHasBeenRefreshed ? Promise.resolve() : Promise.reject({ message: 'You must log in to continue' });
+      });
+    } else {
+      return Promise.resolve();
+    }
   },
   logout: () => {
     // localStorage.removeItem('popcornAuth');
