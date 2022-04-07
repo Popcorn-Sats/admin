@@ -5,12 +5,17 @@ export const httpClient = () => {
   return { Authorization: `Bearer ${token}` };
 }; // FIXME: Kill this?
 
+const endpoints = {
+  'refreshJwt': 'http://localhost:2121/users/refreshtoken',
+  'login': 'http://localhost:2121/users/login',
+}
+
 export const authProvider = {
   // authentication
   login: ({ username, password }) => {
     const request = new Request(
       // process.env.REACT_APP_API_URL + '/users/login',
-      'http://localhost:2121/users/login',
+      endpoints.login,
       {
         method: 'POST',
         body: JSON.stringify({ username, password }),
@@ -18,7 +23,7 @@ export const authProvider = {
         // credentials: 'include',
       }
     );
-    inMemoryJwt.setRefreshTokenEndpoint('http://localhost:2121/users/refreshtoken')
+    inMemoryJwt.setRefreshTokenEndpoint(endpoints.refreshJwt)
     return fetch(request)
       .then((response) => {
         if (response.status < 200 || response.status >= 300) {
@@ -51,7 +56,7 @@ export const authProvider = {
   checkAuth: () => {
     console.log('checkAuth');
     if (!inMemoryJwt.getToken()) {
-      inMemoryJwt.setRefreshTokenEndpoint('http://localhost:2121/users/refreshtoken');
+      inMemoryJwt.setRefreshTokenEndpoint(endpoints.refreshJwt);
       return inMemoryJwt.getRefreshedToken().then(tokenHasBeenRefreshed => {
         return tokenHasBeenRefreshed ? Promise.resolve() : Promise.reject({ message: 'You must log in to continue' });
       });
