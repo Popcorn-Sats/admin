@@ -1,10 +1,5 @@
 import inMemoryJwt from "./services/modules/inMemoryJwt";
 
-export const httpClient = () => {
-  const { token } = JSON.parse(localStorage.getItem('popcornAuth')) || {};
-  return { Authorization: `Bearer ${token}` };
-}; // FIXME: Kill this?
-
 const endpoints = {
   'refreshJwt': 'http://localhost:2121/users/refreshtoken',
   'login': 'http://localhost:2121/users/login',
