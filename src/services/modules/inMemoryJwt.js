@@ -2,7 +2,6 @@ const inMemoryJWTManager = () => {
   let logoutEventName = 'ra-logout'
   let refreshEndpoint = '/refreshtoken'
   let inMemoryJWT = null
-  let inMemoryRefreshToken = null
   let refreshTimeOutId
 
   // This listener allows to disconnect another session of react-admin started in another tab
@@ -36,7 +35,7 @@ const inMemoryJWTManager = () => {
     console.log('refreshing token')
     const request = new Request(refreshEndpoint, {
       method: 'POST',
-      body: JSON.stringify({ 'refreshToken': inMemoryRefreshToken }),
+      body: JSON.stringify({ 'refreshToken': window.sessionStorage.getItem('popcornRefreshToken') }),
       headers: new Headers({ 'Content-Type': 'application/json' }),
       // credentials: 'include',
     })
@@ -65,7 +64,7 @@ const inMemoryJWTManager = () => {
 
   const setToken = (token, delay, passedRefreshToken) => {
       inMemoryJWT = token
-      inMemoryRefreshToken = passedRefreshToken
+      window.sessionStorage.setItem("popcornRefreshToken", passedRefreshToken); // FIXME: Move to properly secured cookie
       refreshToken(delay)
       return true
   }
