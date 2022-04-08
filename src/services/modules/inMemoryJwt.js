@@ -24,7 +24,7 @@ const inMemoryJWTManager = () => {
     ) // Validity period of the token in milliseconds, minus 5 seconds
   }
 
-  const abordRefreshToken = () => {
+  const abortRefreshToken = () => {
     if (refreshTimeOutId) {
       window.clearTimeout(refreshTimeOutId);
     }
@@ -72,7 +72,7 @@ const inMemoryJWTManager = () => {
 
   const eraseToken = () => {
       inMemoryJWT = null
-      abordRefreshToken()
+      abortRefreshToken()
       window.localStorage.setItem(logoutEventName, Date.now())
       return true
   }
