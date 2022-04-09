@@ -9,12 +9,19 @@ const httpClient = (url, options = {}) => {
   if (!options.headers) {
       options.headers = new Headers({ Accept: 'application/json' });
   }
-  // const { accessToken } = JSON.parse(localStorage.getItem('popcornAuth')) || {}
   const accessToken = inMemoryJwt.getToken()
   if (accessToken) {
     options.headers.set('Authorization', `Bearer ${accessToken}`);
+    return fetchUtils.fetchJson(url, options)
+  } else {
+    inMemoryJwt.setRefreshTokenEndpoint(apiUrl + '/users/refreshtoken')
+    return inMemoryJwt.getRefreshedToken().then((gotFreshToken) => {
+      if (gotFreshToken) {
+        options.headers.set('Authorization', `Bearer ${inMemoryJwt.getToken()}`)
+      }
+      return fetchUtils.fetchJson(url, options)
+    })
   }
-  return fetchUtils.fetchJson(url, options);
 }
 
 const dataProvider = {

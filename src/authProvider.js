@@ -3,7 +3,7 @@ import inMemoryJwt from "./services/modules/inMemoryJwt";
 const endpoints = {
   'refreshJwt': 'http://localhost:2121/users/refreshtoken',
   'login': 'http://localhost:2121/users/login',
-}
+} // TODO: Add to config file
 
 export const authProvider = {
   // authentication
@@ -49,15 +49,9 @@ export const authProvider = {
     return Promise.resolve();
   },
   checkAuth: () => {
-    console.log('checkAuth');
-    if (!inMemoryJwt.getToken()) {
-      inMemoryJwt.setRefreshTokenEndpoint(endpoints.refreshJwt);
-      return inMemoryJwt.getRefreshedToken().then(tokenHasBeenRefreshed => {
-        return tokenHasBeenRefreshed ? Promise.resolve() : Promise.reject({ message: 'authentication.expired' });
-      });
-    } else {
-      return Promise.resolve();
-    }
+    return inMemoryJwt.waitForTokenRefresh().then(() => {
+      return inMemoryJwt.getToken() ? Promise.resolve() : Promise.reject({ message: 'authentication.expired' })
+    })
   },
   logout: () => {
     // localStorage.removeItem('popcornAuth');
@@ -79,6 +73,8 @@ export const authProvider = {
     }
   },
   getPermissions: () => {
-    return inMemoryJwt.getToken() ? Promise.resolve() : Promise.reject();
+    return inMemoryJwt.waitForTokenRefresh().then(() => {
+      return inMemoryJwt.getToken() ? Promise.resolve() : Promise.reject()
+    })
   },
 }

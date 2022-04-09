@@ -2,6 +2,7 @@ const inMemoryJWTManager = () => {
   let logoutEventName = 'ra-logout'
   let refreshEndpoint = '/refreshtoken'
   let inMemoryJWT = null
+  let isRefreshing = null
   let refreshTimeOutId
 
   // This listener allows to disconnect another session of react-admin started in another tab
@@ -29,35 +30,48 @@ const inMemoryJWTManager = () => {
     }
   }
 
+  const waitForTokenRefresh = () => {
+    if (!isRefreshing) {
+        return Promise.resolve()
+    }
+    return isRefreshing.then(() => {
+        isRefreshing = false
+        return true
+    })
+}
+
   // The method makes a call to the refresh-token endpoint
   // If there is a valid cookie, the endpoint will return a fresh jwt.
-  const getRefreshedToken = async () => {
+  const getRefreshedToken = () => {
     console.log('refreshing token')
     const request = new Request(refreshEndpoint, {
-      method: 'POST',
+      method: 'POST', // FIXME: Should be a GET
       body: JSON.stringify({ 'refreshToken': window.sessionStorage.getItem('popcornRefreshToken') }),
       headers: new Headers({ 'Content-Type': 'application/json' }),
       // credentials: 'include',
     })
-    return await fetch(request)
+
+    isRefreshing = fetch(request)
       .then((response) => {
         if (response.status !== 200) {
-          eraseToken();
+          eraseToken()
           global.console.log(
             'Failed to renew the jwt from the refresh token.'
           )
-          return { token: null };
+          return { token: null }
         }
-        return response.json();
+        return response.json()
       })
       .then(({ accessToken, tokenExpiry, refreshToken }) => {
         if (accessToken) {
-          setToken(accessToken, tokenExpiry, refreshToken);
-          return true;
+          setToken(accessToken, tokenExpiry, refreshToken)
+          return true
         }
-
-          return false
+        eraseToken()
+        return false
       })
+
+    return isRefreshing
   }
 
   const getToken = () => inMemoryJWT
@@ -84,6 +98,7 @@ const inMemoryJWTManager = () => {
       setLogoutEventName,
       setRefreshTokenEndpoint,
       getRefreshedToken,
+      waitForTokenRefresh,
       setToken,
   }
 }
