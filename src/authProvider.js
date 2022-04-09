@@ -3,6 +3,7 @@ import inMemoryJwt from "./services/modules/inMemoryJwt";
 const endpoints = {
   'refreshJwt': 'http://localhost:2121/users/refreshtoken',
   'login': 'http://localhost:2121/users/login',
+  'logout': 'http://localhost:2121/users/logout',
 } // TODO: Add to config file
 
 export const authProvider = {
@@ -54,9 +55,15 @@ export const authProvider = {
     })
   },
   logout: () => {
-    // localStorage.removeItem('popcornAuth');
+    const request = new Request(endpoints.logout, {
+      method: 'POST',
+      body: JSON.stringify({ refreshToken: window.sessionStorage.getItem('popcornRefreshToken') }),
+      headers: new Headers({ 'Content-Type': 'application/json' }),
+      // credentials: 'include',
+    })
+    window.sessionStorage.removeItem('popcornRefreshToken')
     inMemoryJwt.eraseToken();
-    return Promise.resolve();
+    return fetch(request).then(() => '/login')
   },
   getIdentity: () => {
     try {
