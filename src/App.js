@@ -8,7 +8,8 @@ import accounts from './accounts'
 import categories from './categories'
 import transactions from './transactions'
 import { Dashboard } from "./dashboard"
-import englishMessages from './i18n/en';
+import englishMessages from './i18n/en'
+import { LoginPage } from "./pages/login"
 
 const i18nProvider = polyglotI18nProvider(locale => {
   /* if (locale === 'fr') {
@@ -20,7 +21,7 @@ const i18nProvider = polyglotI18nProvider(locale => {
 }, 'en');
 
 const App = () => (
-  <Admin dataProvider={dataProvider} authProvider={authProvider} i18nProvider={i18nProvider} dashboard={Dashboard}>
+  <Admin dataProvider={dataProvider} authProvider={authProvider} i18nProvider={i18nProvider} loginPage={LoginPage} dashboard={Dashboard}>
     <Resource name="accounts" {...accounts} />
     <Resource name="categories" {...categories} />
     <Resource name="transactions" {...transactions} />
