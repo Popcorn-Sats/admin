@@ -18,6 +18,7 @@ const useStyles = makeStyles(theme => ({
   loginForm: {
       justifyContent: 'center',
       minHeight: '90vh',
+      padding: theme.spacing(3),
   },
   buttonBlock: {
       width: '100%',
@@ -57,7 +58,7 @@ export const LoginPage = ({ theme }) => {
           </AppBar>
           <Grid container spacing={0} justify="center" direction="row">
             <Grid item>
-              <Grid containerdirection="column"justify="center"spacing={2}className={classes.loginForm}>
+              <Grid containerdirection="column" justify="center" spacing={2} className={classes.loginForm}>
                 <Paper variant="elevation" elevation={2} className={classes.loginBackground}>
                   <Grid item>
                     <Typography component="h1" variant="h5">
