@@ -6,19 +6,26 @@ import {
   TextField,
   Grid,
   Paper,
-  AppBar,
   Typography,
-  Toolbar,
   Link
 } from '@material-ui/core'
 import { ThemeProvider } from '@material-ui/styles'
 import { createTheme, makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles(theme => ({
+  background: {
+    background: 'radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%)',
+    height: '100vh',
+  },
+  logo: {
+    margin: '0 auto',
+    display: 'block',
+    marginTop: '20px',
+    marginBottom: '40px',
+  },
   loginForm: {
       justifyContent: 'center',
       minHeight: '90vh',
-      padding: theme.spacing(3),
   },
   buttonBlock: {
       width: '100%',
@@ -44,27 +51,21 @@ export const LoginPage = ({ theme }) => {
     }
 
     return (
-        <ThemeProvider theme={createTheme(defaultTheme)}>
-          <AppBar position="static" alignitems="center" color="primary">
-            <Toolbar>
-              <Grid container justify="center" wrap="wrap">
+      <ThemeProvider theme={createTheme(defaultTheme)}>
+        <Grid container spacing={0} justify="center" direction="row" className={classes.background}>
+          <Grid item>
+            <Grid container direction="column" justify="center" spacing={2} className={classes.loginForm}>
+              <Paper variant="elevation" elevation={2} className={classes.loginBackground}>
                 <Grid item>
-                  <Typography variant="h6">
-                    Popcorn
+                  <Typography component="h1" variant="h5" align='center' className={classes.logo}>
+                    / popcorn logo \
                   </Typography>
                 </Grid>
-              </Grid>
-            </Toolbar>
-          </AppBar>
-          <Grid container spacing={0} justify="center" direction="row">
-            <Grid item>
-              <Grid containerdirection="column" justify="center" spacing={2} className={classes.loginForm}>
-                <Paper variant="elevation" elevation={2} className={classes.loginBackground}>
-                  <Grid item>
-                    <Typography component="h1" variant="h5">
-                      Sign in
-                    </Typography>
-                  </Grid>
+                <Grid item>
+                  <Typography component="h2" variant="h6" align='center'>
+                    Sign in
+                  </Typography>
+                </Grid>
                 <Grid item>
                   <form onSubmit={submit}>
                     <Grid container direction="column" spacing={2}>
@@ -90,24 +91,32 @@ export const LoginPage = ({ theme }) => {
                           required
                         />
                       </Grid>
-                        <Grid item>
-                          <Button variant="contained"color="primary"type="submit"className={classes.buttonBlock}>
-                            Login
-                          </Button>
-                        </Grid>
+                      <Grid item>
+                        <Link href="#" variant='caption'>
+                          Forgot Password?
+                        </Link>
                       </Grid>
-                    </form>
-                  </Grid>
-                  <Grid item>
-                    <Link href="#" variant="body2">
-                      Forgot Password?
-                    </Link>
-                  </Grid>
-                </Paper>
-              </Grid>
+                      <Grid item>
+                        <Button variant="contained" color="primary" type="submit" className={classes.buttonBlock}>
+                          Login
+                        </Button>
+                      </Grid>
+                      <Grid item>
+                        <Typography variant="caption">
+                          Don't have an account?&nbsp;
+                        </Typography>
+                        <Link href="#" variant='caption'>
+                          Sign Up
+                        </Link>
+                      </Grid>
+                    </Grid>
+                  </form>
+                </Grid>
+              </Paper>
             </Grid>
           </Grid>
-          <Notification />
-        </ThemeProvider>
+        </Grid>
+        <Notification />
+      </ThemeProvider>
     )
 }
