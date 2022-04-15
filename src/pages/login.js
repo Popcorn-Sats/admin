@@ -2,13 +2,19 @@ import * as React from 'react'
 import { useState } from 'react'
 import { useLogin, useNotify, Notification, defaultTheme } from 'react-admin'
 import {
+  Avatar,
+  Box,
   Button,
   TextField,
   Grid,
   Paper,
+  Checkbox,
   Typography,
-  Link
+  Link,
+  Container,
+  FormControlLabel,
 } from '@material-ui/core'
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import { ThemeProvider } from '@material-ui/styles'
 import { createTheme, makeStyles } from '@material-ui/core/styles'
 
@@ -16,24 +22,16 @@ const useStyles = makeStyles(theme => ({
   background: {
     background: 'radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%)',
     height: '100vh',
-  },
-  logo: {
-    margin: '0 auto',
-    display: 'block',
-    marginTop: '20px',
-    marginBottom: '40px',
-  },
-  loginForm: {
-      justifyContent: 'center',
-      minHeight: '90vh',
+    paddingTop: '10vh',
   },
   buttonBlock: {
-      width: '100%',
+    marginTop: '30px',
+    marginBottom: '20px',
   },
   loginBackground: {
       justifyContent: 'center',
       minHeight: '30vh',
-      padding: '50px',
+      padding: '30px',
   },
 }))
 
@@ -51,71 +49,82 @@ export const LoginPage = ({ theme }) => {
     }
 
     return (
+
       <ThemeProvider theme={createTheme(defaultTheme)}>
-        <Grid container spacing={0} justify="center" direction="row" className={classes.background}>
-          <Grid item>
-            <Grid container direction="column" justify="center" spacing={2} className={classes.loginForm}>
-              <Paper variant="elevation" elevation={2} className={classes.loginBackground}>
-                <Grid item>
-                  <Typography component="h1" variant="h5" align='center' className={classes.logo}>
-                    / popcorn logo \
-                  </Typography>
-                </Grid>
-                <Grid item>
-                  <Typography component="h2" variant="h6" align='center'>
-                    Sign in
-                  </Typography>
-                </Grid>
-                <Grid item>
-                  <form onSubmit={submit}>
-                    <Grid container direction="column" spacing={2}>
-                      <Grid item>
-                        <TextField
-                          type="text"
-                          placeholder="Username"
-                          fullWidthname="username"
-                          variant="outlined"
-                          value={username}
-                          onChange={e => setUsername(e.target.value)}
-                          required
-                        />
-                      </Grid>
-                      <Grid item>
-                        <TextField
-                          type="password"
-                          placeholder="Password"
-                          fullWidthname="password"
-                          variant="outlined"
-                          value={password}
-                          onChange={e => setPassword(e.target.value)}
-                          required
-                        />
-                      </Grid>
-                      <Grid item>
-                        <Link href="#" variant='caption'>
-                          Forgot Password?
-                        </Link>
-                      </Grid>
-                      <Grid item>
-                        <Button variant="contained" color="primary" type="submit" className={classes.buttonBlock}>
-                          Login
-                        </Button>
-                      </Grid>
-                      <Grid item>
-                        <Typography variant="caption">
-                          Don't have an account?&nbsp;
-                        </Typography>
-                        <Link href="#" variant='caption'>
-                          Sign Up
-                        </Link>
-                      </Grid>
+        <Box className={classes.background}>
+          <Container component="main" maxWidth="xs">
+            <Paper variant="elevation" elevation={2} className={classes.loginBackground}>
+              <Box
+                sx={{
+                  marginTop: 8,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                }}
+              >
+                <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+                  <LockOutlinedIcon />
+                </Avatar>
+                <Typography component="h1" variant="h5">
+                  Sign in
+                </Typography>
+                <Box component="form" onSubmit={submit} noValidate sx={{ mt: 1 }}>
+                  <TextField
+                    margin="normal"
+                    required
+                    fullWidth
+                    id="username"
+                    label="Username"
+                    name="username"
+                    autoComplete="username"
+                    variant='outlined'
+                    value={username}
+                    onChange={e => setUsername(e.target.value)}
+                  />
+                  <TextField
+                    margin="normal"
+                    required
+                    fullWidth
+                    name="password"
+                    label="Password"
+                    type="password"
+                    id="password"
+                    autoComplete="current-password"
+                    variant='outlined'
+                    value={password}
+                    onChange={e => setPassword(e.target.value)}
+                  />
+                  <FormControlLabel
+                    control={<Checkbox value="remember" color="primary" />}
+                    label="Remember me"
+                  />
+                  <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    className={classes.buttonBlock}
+                    sx={{ mt: 3, mb: 2 }}
+                  >
+                    Sign In
+                  </Button>
+                  <Grid container>
+                    <Grid item xs>
+                      <Link href="#" variant="body2">
+                        Forgot password?
+                      </Link>
                     </Grid>
-                  </form>
-                </Grid>
-              </Paper>
-            </Grid>
-          </Grid>
-        </Grid>
+                    <Grid item>
+                      <Link href="#" variant="body2">
+                        {"Don't have an account? Sign Up"}
+                      </Link>
+                    </Grid>
+                  </Grid>
+                </Box>
+              </Box>
+            </Paper>
+          </Container>
+        </Box>
         <Notification />
       </ThemeProvider>
     )
