@@ -243,7 +243,7 @@ const Dashboard = (): ReactElement => {
               <div style={styles.rightCol}>
                 {/* <Timeline />
                 <Spacer /> */}
-                <NewTransactions />
+                <NewTransactions visitors={recentOrders} />
               </div>
           </div>
       </>

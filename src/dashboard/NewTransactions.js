@@ -35,9 +35,11 @@ const TransactionType = ({transactiontype}) => {
     }
 }
 
-const NewTransactions = () => {
+const NewTransactions = (props) => {
     const translate = useTranslate();
     const classes = useStyles();
+
+    const { visitors } = props
 
     const aMonthAgo = subDays(new Date(), 30);
     aMonthAgo.setDate(aMonthAgo.getDate() - 30);
@@ -46,7 +48,7 @@ const NewTransactions = () => {
     aMonthAgo.setSeconds(0);
     aMonthAgo.setMilliseconds(0);
 
-    const { loaded, data: visitors } = useQueryWithStore({
+    /* const { loaded, data: visitors } = useQueryWithStore({
         type: 'getList',
         resource: 'transactions',
         payload: {
@@ -54,12 +56,12 @@ const NewTransactions = () => {
                 has_ordered: true,
                 first_seen_gte: aMonthAgo.toISOString(),
             }, */
-            sort: { field: 'id', order: 'DESC' },
+            /* sort: { field: 'id', order: 'DESC' },
             pagination: { page: 1, perPage: 10 },
         },
-    });
+    }); */
 
-    if (!loaded) return null;
+    // if (!loaded) return null;
 
     const nb = visitors ? visitors.reduce((nb) => ++nb, 0) : 0;
     return (
